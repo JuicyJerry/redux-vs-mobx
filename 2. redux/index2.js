@@ -1,6 +1,7 @@
 const { createStore } = require("redux");
-const reducer = require("./reducers/reducer");
-const { logIn, logOut, addPost } = require("./actions/action");
+const reducer = require("./reducers");
+const { addPost } = require("./actions/post");
+const { logIn, logOut } = require("./actions/user");
 
 const initialState = {
   user: {
@@ -8,10 +9,6 @@ const initialState = {
     data: null,
   },
   posts: [],
-  favorites: [],
-  history: [],
-  likes: [],
-  followers: [],
 };
 
 const store = createStore(reducer, initialState);

@@ -1,7 +1,7 @@
 const { createStore } = require("redux");
 
 const reducer = (prevState, action) => {
-  // 새로운 state 만들어주기
+  //! 새로운 state 만들어주기: 새로운 것으로 대체
   switch (action.type) {
     case "LOG_IN":
       return {
@@ -23,6 +23,7 @@ const reducer = (prevState, action) => {
       return prevState;
   }
 };
+// 리듀서와 맥션이 엄청 길어지겠구나.
 
 const initialState = {
   user: null,
@@ -34,11 +35,13 @@ const initialState = {
 //   posts: [action.data],
 // };
 
+// 불변성 유지하면서 값을 전달
 // const nextState = {
 //   ...initialState,
-//   posts: [...initialState.posts.action.data],
+//   posts: [...initialState.posts, action.data],
 // };
 
+//! store
 const store = createStore(reducer, initialState);
 store.subscribe(() => {
   // react-redux 안에 들어있어요.
@@ -47,7 +50,7 @@ store.subscribe(() => {
 
 console.log("1: ", store.getState()); // state가 나와요
 
-// action을 만드는 creator: 액션 생성자
+//! action을 만드는 creator: 액션 생성자
 const logIn = (data) => {
   return {
     type: "LOG_IN", // action name
@@ -72,7 +75,8 @@ const addPost = (data) => {
 console.log("2: ", store.getState());
 
 // ---------------------------
-// 위에는 미리 만들어야 하는 것이고 밑에는 리액트에서 실행되는 부분
+
+//! 위에는 미리 만들어야 하는 것이고 밑에는 리액트 화면에서 실행되는 부분
 
 store.dispatch(
   logIn({
