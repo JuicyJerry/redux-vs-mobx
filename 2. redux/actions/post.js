@@ -6,6 +6,6 @@ const addPost = (data) => {
   };
 };
 
-module.export = {
+module.exports = {
   addPost,
 };
