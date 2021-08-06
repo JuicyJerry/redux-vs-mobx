@@ -1,5 +1,5 @@
 const initialState = { isLoggingIn: false, data: null };
-const produce = require("immer");
+const { produce } = require("immer");
 
 const LOG_IN_REQUEST = "LOG_IN_REQUEST";
 const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
@@ -33,30 +33,39 @@ const userReducer = (prevState = initialState, action) => {
   */
 
       case LOG_IN_REQUEST:
-        return {
-          ...prevState,
-          isLoggingIn: true,
-        };
+        (draft.data = null), (draft.isLoggingIn = true);
+        break;
+      // return {
+      //   ...prevState,
+      //   isLoggingIn: true,
+      // };
       case LOG_IN_SUCCESS:
-        return {
-          ...prevState,
-          data: action.data,
-          isLoggingIn: false,
-        };
+        (draft.data = action.data), (draft.isLoggingIn = false);
+        break;
+
+      // return {
+      //   ...prevState,
+      //   data: action.data,
+      //   isLoggingIn: false,
+      // };
       case LOG_IN_FAILURE:
-        return {
-          ...prevState,
-          data: null,
-          isLoggingIn: true,
-        };
+        (draft.data = null), (draft.isLoggingIn = false);
+        break;
+      // return {
+      //   ...prevState,
+      //   data: null,
+      //   isLoggingIn: true,
+      // };
       case LOG_OUT:
-        return {
-          ...prevState,
-          data: null,
-          isLoggingIn: false,
-        };
+        (draft.data = null), (draft.isLoggingIn = false);
+        break;
+      // return {
+      //   ...prevState,
+      //   data: null,
+      //   isLoggingIn: false,
+      // };
       default:
-        return prevState;
+        break;
     }
   });
 };
